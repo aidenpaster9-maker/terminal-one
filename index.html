@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Terminal One</title>
+<meta name="description" content="Live memecoin terminal with risk checks and paper trading.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='1.5' y='1.5' width='29' height='29' rx='6' fill='%23e10600'/%3E%3Cpath d='M12.6 11.6 L17.6 8 H20.4 V24 H16.6 V13.2 L12.6 15.6 Z' fill='%23fff'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Titillium+Web:ital,wght@0,400;0,600;0,700;0,900;1,700;1,900&family=Roboto+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header>
+  <div class="brand" aria-label="Terminal One">
+    <svg class="logo1" viewBox="0 0 32 32" aria-hidden="true"><rect class="lb" x="1.5" y="1.5" width="29" height="29" rx="6"/><path class="l1" d="M12.6 11.6 L17.6 8 H20.4 V24 H16.6 V13.2 L12.6 15.6 Z"/></svg>
+    <span>Terminal <span class="one">One</span></span>
+  </div>
+  <nav class="nav" aria-label="Main">
+    <a href="#coins" data-v="coins">Coins</a>
+    <a href="#portfolio" data-v="portfolio">Portfolio</a>
+    <a href="#about" data-v="about">About</a>
+  </nav>
+  <div class="search">
+    <input id="q" type="search" placeholder="Search coins or paste a CA" aria-label="Search coins by name, ticker or contract address" autocomplete="off">
+  </div>
+  <div class="spacer"></div>
+  <div class="seg" role="group" aria-label="Interface mode">
+    <button id="m-simple" aria-pressed="true">Simple</button>
+    <button id="m-pro" aria-pressed="false">Pro</button>
+  </div>
+  <button class="btn" id="walletBtn">Connect wallet</button>
+</header>
+<div class="demo"><b>Paper trading.</b> Prices and coins are live. Trades use practice money, so nothing you do here moves real funds.</div>
+<div class="tstrip" aria-label="Trending coins"><span class="live"><span class="pulse"></span>Live</span><div class="tviewport"><div class="ttrack" id="ttrack"></div></div></div>
+
+<main>
+  <section id="view-coins">
+    <div class="movers" id="movers" aria-label="Market movers"></div>
+    <div class="desk">
+      <aside class="pane" aria-label="Coin feed">
+        <div class="pane-h"><h2 style="display:flex;align-items:center;gap:8px"><span class="pulse"></span>Coin feed</h2><span class="label" id="feedCount"></span></div>
+        <div class="feedbar"><div class="seg" role="group" aria-label="Chain filter" id="chainSeg"></div></div>
+        <div class="feedtabs" role="group" aria-label="List">
+          <button data-tab="new" aria-pressed="true">New profiles</button>
+          <button data-tab="trending" aria-pressed="false">Trending</button>
+          <button data-tab="search" aria-pressed="false" id="searchTab" hidden>Search</button>
+        </div>
+        <ul class="feed" id="feed"></ul>
+      </aside>
+      <section class="pane" aria-label="Coin detail" id="tokenPane"></section>
+      <aside class="pane ticket" aria-label="Paper order ticket">
+        <div class="pane-h"><h2>Order ticket</h2><span class="label">Paper trading</span></div>
+        <div class="tbody" id="ticket"></div>
+      </aside>
+    </div>
+  </section>
+  <section id="view-portfolio" hidden></section>
+  <section id="view-about" hidden></section>
+</main>
+
+<div class="scrim" id="walletModal" hidden>
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="wmTitle">
+    <h2 id="wmTitle">Connect a wallet</h2>
+    <p class="note" style="margin:0">Terminal One only reads your address and balance. It never asks for your recovery phrase and can't move your funds.</p>
+    <button class="wopt" data-w="phantom"><span><b>Phantom</b><br><span class="note">Solana</span></span><span class="chain" id="st-phantom">Connect</span></button>
+    <button class="wopt" data-w="metamask"><span><b>MetaMask</b><br><span class="note">Ethereum, Base, BNB Chain</span></span><span class="chain" id="st-metamask">Connect</span></button>
+    <div style="display:flex;gap:8px;justify-content:flex-end"><button class="btn" id="wmClose">Close</button></div>
+  </div>
+</div>
+<div class="toast" id="toast" hidden role="status"></div>
+<script type="module" src="app.js"></script>
+</body>
+</html>
